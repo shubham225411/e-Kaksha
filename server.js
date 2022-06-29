@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const cors = require("cors")
 var app = express();
 const port = process.env.PORT || 3000;
 var server = app.listen(port, function () {
@@ -11,6 +12,7 @@ const io = require("socket.io")(server, {
   allowEIO3: true, // false by default
 });
 app.use(express.static(path.join(__dirname, "")));
+app.use(cors);
 var userConnections = [];
 io.on("connection", (socket) => {
   console.log("socket id is ", socket.id);
